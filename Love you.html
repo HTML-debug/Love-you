@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOR YOU</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            background: #fce4ec;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: #ff4081;
+            transition: 0.5s;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #ff80ab;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            color: white;
+            margin-top: 30px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #f50057;
+        }
+
+        /* Animasi teks */
+        .animate-text {
+            animation: fadeScale 1s forwards;
+        }
+
+        @keyframes fadeScale {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Warna teks rainbow */
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #ffff00; }
+            42% { color: #00ff00; }
+            57% { color: #0000ff; }
+            71% { color: #4b0082; }
+            85% { color: #8b00ff; }
+            100% { color: #ff0000; }
+        }
+
+        .rainbow {
+            animation: rainbow 2s infinite;
+        }
+
+        /* Animasi hati di background */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4081;
+            transform: rotate(45deg);
+            animation: floatUp 5s linear infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4081;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(45deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="text">Haii</h1>
+    <button onclick="changeText()">PENCET DISINI</button>
+
+    <script>
+        function changeText() {
+            const text = document.getElementById("text");
+            text.innerText = "I Love You";
+            text.classList.add("animate-text", "rainbow");
+
+            // Tambah hati di background
+            for(let i = 0; i < 20; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+            heart.style.width = heart.style.height = 10 + Math.random() * 30 + "px";
+            heart.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 70%)`;
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+    </script>
+</body>
+</html>
